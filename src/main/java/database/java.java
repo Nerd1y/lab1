@@ -25,10 +25,10 @@ public class java {
                 System.out.println("Room Number: " + room_number + ", Room Type: " + room_type + ", Room Price: " + room_price);
             }
             if (!connection.isClosed()) {
-                System.out.println("Connection established.");
+                System.out.println("Connection ok");
             }
         } catch (SQLException e) {
-            System.out.println("Connection failed.");
+            System.out.println("Connection ne ok");
             e.printStackTrace();
         }
     }
