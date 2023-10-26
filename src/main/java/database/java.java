@@ -12,23 +12,24 @@ public class java {
         String query = "SELECT * FROM clients, rooms WHERE clients.idClients = rooms.idrooms";
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);;
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
-                int id = resultSet.getInt(1);
-                String name = resultSet.getString(2);
-                int idrooms = resultSet.getInt(3);
+                int id = resultSet.getInt("idClients");
+                String name = resultSet.getString("name");
+                int idrooms = resultSet.getInt("idrooms");
                 System.out.println("ID: " + id + ", Name: " + name + ", IDRooms: " + idrooms);
-                int room_number = resultSet.getInt(5);
-                String room_type = resultSet.getString(6);
-                int room_price = resultSet.getInt(7);
+                int room_number = resultSet.getInt("room_number");
+                String room_type = resultSet.getString("room_type");
+                int room_price = resultSet.getInt("room_price");
                 System.out.println("Room Number: " + room_number + ", Room Type: " + room_type + ", Room Price: " + room_price);
             }
             if (!connection.isClosed()) {
-                System.out.println("Soed est'");
+                System.out.println("Connection established.");
             }
         } catch (SQLException e) {
-              System.out.println("Net soed");
+            System.out.println("Connection failed.");
+            e.printStackTrace();
         }
     }
 }
